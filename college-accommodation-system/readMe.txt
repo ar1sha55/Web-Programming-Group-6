@@ -1,1 +1,1 @@
-Untuk yang real punya, boleh letak korang punya progress kat sini
+Untuk projek yang betul punya, boleh letak korang punya progress kat sini. 
