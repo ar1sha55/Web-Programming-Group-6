@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 }
 
 // Create the database
-$conn->query("CREATE DATABASE IF NOT EXISTS `$db_name`");
+$conn->query("CREATE DATABASE IF NOT EXISTS $db_name");
 $conn->select_db($db_name);
 
 // Schema
@@ -47,14 +47,23 @@ CREATE TABLE IF NOT EXISTS colleges (
     available_slots INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS rooms (
+    room_id INT AUTO_INCREMENT PRIMARY KEY,
+    college_id INT NOT NULL,
+    room_type ENUM('single', 'double') NOT NULL,
+    total_rooms INT NOT NULL,
+    available_rooms INT NOT NULL,
+    FOREIGN KEY (college_id) REFERENCES colleges(college_id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS applications (
     application_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
     college_id INT NOT NULL,
+    room_type ENUM('single', 'double') NOT NULL,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    remarks TEXT,
+    remarks TEXT, 
     apply_date DATE NOT NULL,
-    preferred_start_date DATE,
     FOREIGN KEY (student_id) REFERENCES users(user_id),
     FOREIGN KEY (college_id) REFERENCES colleges(college_id)
 );
@@ -80,17 +89,18 @@ CREATE TABLE IF NOT EXISTS history_log (
 );
 SQL;
 
+// Execute schema
 $conn->multi_query($schema);
 while ($conn->more_results() && $conn->next_result()) {}
 
 // Insert users and extend with students/managers
 $users = [
-    ['Muhammad Nazmi', 'admin1', 'admin1', 1],
-    ['Nur Arisha', 'admin2', 'admin2', 1],
-    ['Muhammad Khairul', 'manager1', 'manager1', 2],
-    ['Alya Qistina', 'manager2', 'manager2', 2],
-    ['Muhammad Danish', 'student1', 'student1', 3],
-    ['Siti Nurhaliza', 'student2', 'student2', 3]
+    ['Adam', 'admin1', 'admin1', 1],
+    ['Nurul', 'admin2', 'admin2', 1],
+    ['Haziq', 'manager1', 'manager1', 2],
+    ['Siti', 'manager2', 'manager2', 2],
+    ['Hazirah', 'student1', 'student1', 3],
+    ['Akmal', 'student2', 'student2', 3]
 ];
 
 foreach ($users as $u) {
@@ -98,8 +108,7 @@ foreach ($users as $u) {
     $stmt->bind_param("sssi", $u[0], $u[1], $u[2], $u[3]);
     $stmt->execute();
     $userId = $conn->insert_id;
-
-    if ($u[3] === 3) { // student
+if ($u[3] === 3) { // student
         $matric = "A20CS00$userId";
         $program = "Bachelor of Computer Science";
         $year = 2;
@@ -117,15 +126,12 @@ foreach ($users as $u) {
 
 // Insert colleges
 $colleges = [
-    ['Kolej Perdana (KP)', 100],
-    ['Kolej Tun Dr. Ismail (KTDI)', 0], //demonstrate for full capacity
-    ['Kolej Tun Hussein Onn (KTHO)', 60],
-    ['Kolej Tuanku Rahman Putra (KTR)', 90],
-    ['Kolej Datin Seri Endon (KDSE)', 75],
-    ['Kolej Dato Onn Jaafar (KDOJ)', 110],
-    ['Kolej Tun Fatimah (KTF)', 150],
-    ['Kolej Rahman Putra (KRP)', 90],
-    ['Kolej Tuanku Canselor (KTC)', 110]
+    ['Kolej Perdana (KP)', 100], //1
+    ['Kolej Tun Dr. Ismail (KTDI)', 0], //2 (demonstrate for full capacity) 
+    ['Kolej Tun Hussein Onn (KTHO)', 60], //3
+    ['Kolej Tuanku Rahman Putra (KTR)', 90], //4
+    ['Kolej Datin Seri Endon (KDSE)', 75], //5
+    ['Kolej Dato Onn Jaafar (KDOJ)', 110], //6
 ];
 
 foreach ($colleges as $c) {
@@ -134,6 +140,28 @@ foreach ($colleges as $c) {
     $stmt->execute();
 }
 
-echo "<h3>✅ Database, tables, and extended user profiles created successfully!</h3>";
+// Insert rooms for each college
+$rooms = [
+    [1, 'Single', 50, 50],
+    [1, 'Double', 30, 30],
+    [2, 'Single', 0, 0],
+    [2, 'Double', 0, 0],
+    [3, 'Single', 35, 35],
+    [3, 'Double', 25, 25],
+    [4, 'Single', 45, 45],
+    [4, 'Double', 45, 45],
+    [5, 'Single', 40, 40],
+    [5, 'Double', 35, 35],
+    [6, 'Single', 50, 50],
+    [6, 'Double', 60, 60],
+];
+
+foreach ($rooms as $room) {
+    $stmt = $conn->prepare("INSERT IGNORE INTO rooms (college_id, room_type, total_rooms, available_rooms) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isii", $room[0], $room[1], $room[2], $room[3]);
+    $stmt->execute();
+}
+
+echo "<h3>✅ Database, tables, users, colleges, rooms created successfully!</h3>";
 $conn->close();
 ?>
