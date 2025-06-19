@@ -8,9 +8,9 @@
 college-accommodation-system/
 │
 **Arisha**
-├── config.php                     ← DB config variable
-├── db_connect.php                 ← DB connection using config.php
-├── create_db.php                  ← One-time DB schema + seed data creation
+├── config.php ✅                   ← DB config variable (tak tukar)
+├── db_connect.php    ✅              ← DB connection using config.php (tak tukar)
+├── create_db.php ✅                  ← One-time DB schema + seed data creation (extend db)
 │
 **Nazmi**
 ├── login.php   ✅               ← Login form
