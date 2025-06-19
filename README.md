@@ -1,5 +1,7 @@
 **TEKAN EDIT UNTUK BACA**
 
+**Aku dah letak template project yang aku dah buat, korang boleh try run kat localhost korang try explore and fahamkan dulu. file kat sini tak lengkap sangat pun. korang boleh adjust and tambah apa yang patut ikut korang punya part. and yang paling penting, korang kena design sendiri file yang ada html page ikut part masing masing.**
+
 Flow of Project:
 college-accommodation-system/
 │
@@ -42,6 +44,7 @@ college-accommodation-system/
 ├── style.css                      ← Global styles
 ├── form_validation.js             ← Validates inputs across forms
 ├── table_filter.js                ← (Optional) Enables live table search/sort
+
 
 
 Pages yang perlukan file form_validation.js (untuk masa sekarang):
