@@ -20,7 +20,7 @@ college-accommodation-system/
 ├── log_helper.php  ✅                ← logAction() helper for history_log
 │
 **Tina and Arisha**
-├── admin_page.php                 ← Admin dashboard
+├── admin_page.php   (nazmi)              ← Admin dashboard
 ├── manage_users.php               ← Admin view of user table, add/edit/delete
 ├── add_user.php                   ← Admin inserts user
 ├── edit_user.php                  ← Admin edits user
@@ -32,13 +32,13 @@ college-accommodation-system/
 ├── update_profile.php             ← Saves updated profile
 │
 **Nazmi and Khairul**
-├── student_page.php               ← Student dashboard
+├── student_page.php      (nazmi)        ← Student dashboard
 ├── apply_accommodation.php       ← Form to apply for college
 ├── submit_application.php         ← Handles application insert
 ├── view_my_application.php        ← Student views their own application(s)
 │
 **Khairul and Nazmi**
-├── manager_page.php               ← Manager dashboard
+├── manager_page.php     (nazmi)          ← Manager dashboard
 ├── view_applications.php          ← Manager views all applications
 ├── process_application.php        ← Manager approves/rejects applications
 ├── manager_report.php             ← Searchable/sortable list of apps
