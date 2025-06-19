@@ -47,7 +47,7 @@ college-accommodation-system/
 ├── table_filter.js                ← (Optional) Enables live table search/sort
 
 
-
+**JAVASCRIPT (DOM)**
 Pages yang perlukan file form_validation.js (untuk masa sekarang):
 
 1.apply_accommodation.php
@@ -65,3 +65,11 @@ Password length (at least 5 characters).
 
 4.edit_user.php
 Reason: Admin edits user data. This page should also include the validation to ensure that changes made (e.g., password, email, phone) are valid.
+
+**HTML & CSS**
+kalau letak dekat semua dekat style.css aku rasa susah nak synckan and boleh pening. so aku rasa:
+untuk file .css untuk styling html page, korang boleh buat file .css khas. contoh untuk index.php -> index.css, tapi untuk admin, manager and student punya dashboard boleh satukan sebab sama je untuk consistency -> dashboard.css
+
+jangan lupa untuk letak  <link rel="stylesheet" href="style.css"> (wajib) and <link rel="stylesheet" href="FILECSSKHAS.css"> kat bahagian head
+
+
