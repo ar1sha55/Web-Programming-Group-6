@@ -3,20 +3,21 @@
 **Aku dah letak template project yang aku dah buat, korang boleh try run kat localhost korang try explore and fahamkan dulu. file kat sini tak lengkap sangat pun. korang boleh adjust and tambah apa yang patut ikut korang punya part. and yang paling penting, korang kena design sendiri file yang ada html page ikut part masing masing.**
 
 **Flow of Project:**
+**TICK GUNA ✅ KALAU DAH COMPLETE**
 
 college-accommodation-system/
 │
 **Arisha**
-├── config.php                     ← DB config constants (DB_HOST, DB_USER...)
+├── config.php                     ← DB config variable
 ├── db_connect.php                 ← DB connection using config.php
 ├── create_db.php                  ← One-time DB schema + seed data creation
 │
 **Nazmi**
-├── login.php                      ← Login form
-├── login_process.php             ← Verifies login, sets session
-├── logout.php                     ← Ends session
-├── auth.php                       ← Session/role-based access protection
-├── log_helper.php                 ← logAction() helper for history_log
+├── login.php   ✅               ← Login form
+├── login_process.php  ✅            ← Verifies login, sets session
+├── logout.php  ✅                    ← Ends session
+├── auth.php    ✅                    ← Session/role-based access protection
+├── log_helper.php  ✅                ← logAction() helper for history_log
 │
 **Tina and Arisha**
 ├── admin_page.php                 ← Admin dashboard
@@ -42,7 +43,9 @@ college-accommodation-system/
 ├── process_application.php        ← Manager approves/rejects applications
 ├── manager_report.php             ← Searchable/sortable list of apps
 │
+letak file.css korang kat sini untuk mudah track
 ├── style.css                      ← Global styles
+├── dashboard.css                      ← style untuk dashboard
 ├── form_validation.js             ← Validates inputs across forms
 ├── table_filter.js                ← (Optional) Enables live table search/sort
 
