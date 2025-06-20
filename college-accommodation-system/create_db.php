@@ -1,13 +1,13 @@
 <?php
 require_once 'config.php';
 
-// Connect without selecting DB (needed to create DB first)
+// Connect without selecting DB
 $conn = new mysqli($db_host, $db_user, $db_pass);
 if ($conn->connect_error) {
     die("❌ Connection failed: " . $conn->connect_error);
 }
 
-// Create the database
+// Create DB
 $conn->query("CREATE DATABASE IF NOT EXISTS $db_name");
 $conn->select_db($db_name);
 
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS rooms (
     room_id INT AUTO_INCREMENT PRIMARY KEY,
     college_id INT NOT NULL,
     room_type ENUM('single', 'double') NOT NULL,
-    total_rooms INT NOT NULL,
     available_rooms INT NOT NULL,
+    available_beds INT NOT NULL,
     FOREIGN KEY (college_id) REFERENCES colleges(college_id) ON DELETE CASCADE
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS applications (
     college_id INT NOT NULL,
     room_type ENUM('single', 'double') NOT NULL,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    remarks TEXT, 
+    remarks TEXT,
     apply_date DATE NOT NULL,
     FOREIGN KEY (student_id) REFERENCES users(user_id),
     FOREIGN KEY (college_id) REFERENCES colleges(college_id)
@@ -93,7 +93,7 @@ SQL;
 $conn->multi_query($schema);
 while ($conn->more_results() && $conn->next_result()) {}
 
-// Insert users and extend with students/managers
+// Insert users
 $users = [
     ['Adam', 'admin1', 'admin1', 1],
     ['Nurul', 'admin2', 'admin2', 1],
@@ -108,14 +108,14 @@ foreach ($users as $u) {
     $stmt->bind_param("sssi", $u[0], $u[1], $u[2], $u[3]);
     $stmt->execute();
     $userId = $conn->insert_id;
-if ($u[3] === 3) { // student
+    if ($u[3] === 3) {
         $matric = "A20CS00$userId";
         $program = "Bachelor of Computer Science";
         $year = 2;
         $stmt2 = $conn->prepare("INSERT IGNORE INTO students (student_id, matric_number, program, year) VALUES (?, ?, ?, ?)");
         $stmt2->bind_param("issi", $userId, $matric, $program, $year);
         $stmt2->execute();
-    } elseif ($u[3] === 2) { // manager
+    } elseif ($u[3] === 2) {
         $dept = "Accommodation Office";
         $phone = "03-8921$userId";
         $stmt3 = $conn->prepare("INSERT IGNORE INTO managers (manager_id, department, office_phone) VALUES (?, ?, ?)");
@@ -124,44 +124,60 @@ if ($u[3] === 3) { // student
     }
 }
 
-// Insert colleges
+// Insert colleges (slots = 0 initially)
 $colleges = [
-    ['Kolej Perdana (KP)', 100], //1
-    ['Kolej Tun Dr. Ismail (KTDI)', 0], //2 (demonstrate for full capacity) 
-    ['Kolej Tun Hussein Onn (KTHO)', 60], //3
-    ['Kolej Tuanku Rahman Putra (KTR)', 90], //4
-    ['Kolej Datin Seri Endon (KDSE)', 75], //5
-    ['Kolej Dato Onn Jaafar (KDOJ)', 110], //6
+    ['Kolej Perdana (KP)', 100],
+    ['Kolej Tun Dr. Ismail (KTDI)', 100],
+    ['Kolej Tun Hussein Onn (KTHO)', 60],
+    ['Kolej Tuanku Rahman Putra (KTR)', 90],
+    ['Kolej Datin Seri Endon (KDSE)', 75],
+    ['Kolej Dato Onn Jaafar (KDOJ)', 110],
 ];
 
 foreach ($colleges as $c) {
-    $stmt = $conn->prepare("INSERT IGNORE INTO colleges (college_name, capacity, available_slots) VALUES (?, ?, ?)");
-    $stmt->bind_param("sii", $c[0], $c[1], $c[1]);
+    $stmt = $conn->prepare("INSERT IGNORE INTO colleges (college_name, capacity, available_slots) VALUES (?, ?, 0)");
+    $stmt->bind_param("si", $c[0], $c[1]);
     $stmt->execute();
 }
 
-// Insert rooms for each college
+// Insert rooms + set available_beds
 $rooms = [
     [1, 'Single', 50, 50],
-    [1, 'Double', 30, 30],
-    [2, 'Single', 0, 0],
-    [2, 'Double', 0, 0],
-    [3, 'Single', 35, 35],
-    [3, 'Double', 25, 25],
-    [4, 'Single', 45, 45],
-    [4, 'Double', 45, 45],
-    [5, 'Single', 40, 40],
-    [5, 'Double', 35, 35],
+    [1, 'Double', 25, 50],
+    [2, 'Single', 1, 1],
+    [2, 'Double', 1, 2],
+    [3, 'Single', 30, 30],
+    [3, 'Double', 15, 30],
+    [4, 'Single', 40, 40],
+    [4, 'Double', 25, 50],
+    [5, 'Single', 25, 25],
+    [5, 'Double', 25, 50],
     [6, 'Single', 50, 50],
-    [6, 'Double', 60, 60],
+    [6, 'Double', 30, 60],
 ];
 
 foreach ($rooms as $room) {
-    $stmt = $conn->prepare("INSERT IGNORE INTO rooms (college_id, room_type, total_rooms, available_rooms) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isii", $room[0], $room[1], $room[2], $room[3]);
+    $college_id = $room[0];
+    $type = $room[1];
+    $available_rooms = $room[2];
+    $available_beds = $room[3];
+
+    $stmt = $conn->prepare("INSERT IGNORE INTO rooms (college_id, room_type, available_rooms, available_beds) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isii", $college_id, $type, $available_rooms, $available_beds);
     $stmt->execute();
 }
 
-echo "<h3>✅ Database, tables, users, colleges, rooms created successfully!</h3>";
+// Sync available_slots based on available_beds
+$conn->query("
+    UPDATE colleges c
+    JOIN (
+        SELECT college_id,
+               SUM(available_beds) AS slots
+        FROM rooms
+        GROUP BY college_id
+    ) r ON c.college_id = r.college_id
+    SET c.available_slots = r.slots
+");
+
+echo "<h3>✅ Database, tables, users, colleges, and rooms created successfully with available_beds and available_rooms logic!</h3>";
 $conn->close();
-?>
