@@ -1,0 +1,134 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center; /* Center the container horizontally */
+    align-items: center; /* Center the container vertically */
+    flex-direction: column;
+}
+
+/* System Name Styling */
+.system-name {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.system-name h1 {
+    font-size: 3em;
+    font-weight: 700;
+    color: #23523f; /* Darker green shade for better contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
+    word-wrap: break-word; /* Ensure text breaks properly on small screens */
+}
+
+/* Login Container */
+.login-container {
+    width: 100%;
+    max-width: 500px; 
+    padding: 40px 50px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Heading Styling */
+h2 {
+    color: #328E6E;
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form elements */
+}
+
+/* Form Label Styling */
+form label {
+    font-weight: 700;
+    font-size: 1.2em;
+    text-align: left;
+    color: #328E6E;
+}
+
+/* Input Field Styling */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #67AE6E; 
+    border-radius: 6px;
+    background: #f9f9f9;
+    font-size: 1.1em;
+    line-height: 1.5;
+    transition: border 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+/* Input Focus State */
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #328E6E; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(50, 142, 110, 0.7); 
+}
+
+/* Submit Button */
+form input[type="submit"] {
+    padding: 16px;
+    background-color: #328E6E; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2em;  
+    transition: background 0.3s ease, transform 0.3s ease; 
+    margin-top: 10px;
+}
+
+/* Button Hover Effect */
+form input[type="submit"]:hover {
+    background-color: #67AE6E; 
+    transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+
+/* Mobile Optimization */
+@media screen and (max-width: 768px) {
+    .system-name h1 {
+        font-size: 2em; 
+        word-wrap: break-word;
+    }
+
+    .login-container {
+        width: 90%; 
+        padding: 30px 35px;
+    }
+
+    h2 {
+        font-size: 1.5em; 
+    }
+
+    form input[type="submit"] {
+        padding: 14px; /* Slightly reduced padding for smaller screens */
+    }
+
+    form label {
+        font-size: 1.1em; 
+    }
+
+    form input[type="text"],
+    form input[type="password"] {
+        padding: 12px; /* Slightly reduced padding for inputs */
+    }
+}

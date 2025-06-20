@@ -1,0 +1,171 @@
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #328E6E;
+    padding: 20px 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+    transition: background-color 0.3s ease;
+    
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-links li {
+    margin: 0 5px;
+}
+
+/* Navbar Links Styling */
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    position: relative; /* For the pseudo-element to work */
+    padding: 8px 12px; /* Adds some padding for better clickable area */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Hover Effect */
+.navbar-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px; /* Size of the underline effect */
+    background-color: #67AE6E; /* Color for the underline */
+    transition: width 0.3s ease; /* Smooth transition effect */
+}
+
+.navbar-links a:hover::before {
+    width: 100%; /* Makes the underline appear on hover */
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background when hovered */
+}
+/* Dashboard Content */
+.dashboard-content {
+    margin-top: 60px; /* Adjust for navbar */
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+
+/* Welcome Message Styling */
+.welcome-message {
+    font-size: 2.6em; /* Slightly larger font size for better visibility */
+    color: white; /* White color for strong contrast against the background */
+    font-weight: 600; /* Slightly bold for better emphasis */
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Darker shadow for more contrast */
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+
+/* Cards Layout */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+    gap: 30px;
+    max-width: 900px;
+    width: 100%;
+    justify-items: center;
+    margin: 10px auto;
+}
+
+/* Card Styling */
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card a {
+    color: #328E6E;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.card-icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Mobile Optimization */
+@media screen and (max-width: 768px) {
+    .dashboard-wrapper {
+        padding-top: 220px; /* Creates space for the navbar */
+    }
+
+     .welcome-message {
+        font-size: 1.5em; /* Smaller font size on mobile */
+    }
+    
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .navbar-logo h1 {
+        font-size: 1.3em;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .navbar-links li {
+        margin: 10px 0;
+    }
+
+    .dashboard-content h2 {
+        font-size: 1.8em;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr; /* One card per row on mobile */
+        gap: 15px;
+    }
+
+    .card {
+        width: 90%;
+        height: auto;
+    }
+}
