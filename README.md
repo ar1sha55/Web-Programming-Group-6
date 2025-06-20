@@ -33,15 +33,15 @@ college-accommodation-system/
 │
 **Nazmi and Khairul**
 ├── student_page.php ✅      (nazmi)        ← Student dashboard
-├── apply_accommodation.php       ← Form to apply for college
-├── submit_application.php         ← Handles application insert
-├── view_my_application.php        ← Student views their own application(s)
+├── apply_accommodation.php ✅ belum styling       ← Form to apply for college
+├── submit_application.php ✅         ← Handles application insert
+├── view_my_application.php  ✅ belum styling      ← Student views their own application(s)
 │
 **Khairul and Nazmi**
 ├── manager_page.php ✅    (nazmi)          ← Manager dashboard
-├── view_applications.php          ← Manager views all applications
-├── process_application.php        ← Manager approves/rejects applications
-├── manager_report.php             ← Searchable/sortable list of apps
+├── view_applications.php  ✅ belum styling        ← Manager views all applications
+├── process_application.php  ✅       ← Manager approves/rejects applications
+├── manager_report.php   **KIV**         ← Searchable/sortable list of apps
 │
 letak file.css korang kat sini untuk mudah track
 ├── style.css                      ← Global styles
