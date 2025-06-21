@@ -1,18 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #E1EEBC, #328E6E);
-    min-height: 100vh;
-    color: #333;
-    padding: 0 20px;
-}
 
 .navbar {
     display: flex;
@@ -70,6 +55,7 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* === Responsive Hamburger === */
 .hamburger {
     display: none;
     font-size: 28px;
@@ -104,13 +90,14 @@ body {
     }
 }
 
-
+/* === Dashboard Content Wrapper === */
 .dashboard-content {
     margin-top: 100px;
     text-align: center;
     width: 100%;
 }
 
+/* === Heading Consistency === */
 .dashboard-content h2 {
     font-size: 2.6em;
     color: white;
@@ -119,6 +106,7 @@ body {
     margin-bottom: 25px;
 }
 
+/* === Back Button === */
 .dashboard-content a {
     color: #ffffff;
     background-color: #328E6E;
@@ -136,6 +124,7 @@ body {
     background-color: #276D59;
 }
 
+/* === Logs Table === */
 table {
     width: 90%;
     margin: 20px auto;
@@ -171,6 +160,7 @@ tr:hover {
     background-color: #e0f3ec;
 }
 
+/* === Mobile Table === */
 @media screen and (max-width: 768px) {
     table, thead, tbody, th, td, tr {
         display: block;
