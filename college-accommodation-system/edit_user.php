@@ -94,12 +94,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Edit User</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="edit_users.css">
 </head>
 <body>
+    
+
+<div class="dashboard-wrapper">
+    <nav class="navbar">
+    <div class="navbar-logo">
+        <h1>Student College Accommodation System</h1>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div> 
+
+    <ul class="navbar-links" id="navbar-links"> 
+        <li><a href="manager_dashboard.php">Dashboard</a></li>
+        <li><a href="manage_users.php">Manage Users</a></li>
+        <li><a href="view_logs.php">View System Logs</a></li>
+        <li><a href="logout.php">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
 <h2>✏️ Edit User</h2>
 <a href="manage_users.php">← Back to User List</a><br><br>
 
-<!-- Display success or error message -->
+
 <?php if (isset($_SESSION['user_message'])): ?>
     <div class="message" style="padding: 10px; background-color: #e0f7fa; border: 1px solid #4caf50; color: #00796b; margin-bottom: 15px;">
         <?= $_SESSION['user_message']; unset($_SESSION['user_message']); ?>
@@ -107,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
 <form method="post">
-    <h4>🔒 Account Info</h4>
+    <h4 class = "accountinfo">Account Info</h4>
     Full Name: <input type="text" name="full_name" value="<?= htmlspecialchars($user['full_name']) ?>" required><br>
     Username: <input type="text" name="username" value="<?= htmlspecialchars($user['username']) ?>" required><br>
     Password: <input type="password" name="password" value="<?= htmlspecialchars($user['password']) ?>"><br>
@@ -136,6 +156,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <br><input type="submit" value="Update User">
 </form>
+    </div>
+    </div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("navbar-links").classList.toggle("active");
+}
+</script>
+
 
 </body>
 </html>
