@@ -1,0 +1,178 @@
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #328E6E;
+    padding: 20px 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+    transition: background-color 0.3s ease;
+  
+    
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-links li {
+    margin: 0 5px;
+}
+
+/* Navbar Links Styling */
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    position: relative; /* For the pseudo-element to work */
+    padding: 8px 12px; /* Adds some padding for better clickable area */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Hover Effect */
+.navbar-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px; /* Size of the underline effect */
+    background-color: #67AE6E; /* Color for the underline */
+    transition: width 0.3s ease; /* Smooth transition effect */
+}
+
+.navbar-links a:hover::before {
+    width: 100%; /* Makes the underline appear on hover */
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background when hovered */
+}
+
+/* Application Page Container */
+.app-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 120px auto 40px; /* top to compensate navbar */
+  padding: 20px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Titles */
+.app-title {
+  font-size: 1.8em;
+  color: #328E6E;
+  margin-bottom: 15px;
+}
+
+/* Latest Application Card */
+.app-card {
+  background: #fefefe;
+  padding: 15px;
+  border-left: 5px solid #67AE6E;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+
+/* Alert Message */
+.app-alert {
+  padding: 12px;
+  background-color: #ffebee;
+  color: #d32f2f;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* History Table */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.app-table th, .app-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.app-table th {
+  background-color: #E1EEBC;
+  color: #23523f;
+}
+
+/* Status Highlight */
+.status {
+  font-weight: 600;
+  color: #328E6E;
+}
+
+/* Back Link */
+.app-back {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.app-back a {
+    color: #328E6E;
+    text-decoration: none;
+}
+
+.app-back a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Optimization */
+@media screen and (max-width: 768px) {
+
+   .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .navbar-logo h1 {
+        font-size: 1.3em;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .navbar-links li {
+        margin: 10px 0;
+    }
+
+    .app-container { 
+    width: 95%; 
+    margin-top: 320px; 
+    padding: 15px; 
+    }
+
+    .app-title { 
+    font-size: 1.5em; 
+    }
+
+    .app-table th, .app-table td { 
+        padding: 8px; 
+        font-size: 0.95em; 
+    }
+}
