@@ -21,11 +21,11 @@ college-accommodation-system/
 │
 **Tina and Arisha**
 ├── admin_page.php ✅   (nazmi)              ← Admin dashboard
-├── manage_users.php               ← Admin view of user table, add/edit/delete
-├── add_user.php                   ← Admin inserts user
-├── edit_user.php                  ← Admin edits user
+├── manage_users.php    ✅           ← Admin view of user table, add/edit/delete
+├── add_user.php     ✅              ← Admin inserts user
+├── edit_user.php     ✅             ← Admin edits user
 ├── delete_user.php                ← Admin deletes user
-├── view_logs.php                  ← Admin views history log
+├── view_logs.php    ✅               ← Admin views history log
 │
 **Nazmi**
 ├── edit_profile.php               ← User updates own profile (student/manager)
