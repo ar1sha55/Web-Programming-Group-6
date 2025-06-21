@@ -1,7 +1,13 @@
 <?php
 require 'auth.php';
-checkLevel(1); // Admin only
-require 'db_connect.php';
+checkLevel(1); 
+
+// dummy data
+$users = [
+    ['id' => 1, 'name' => 'Alice', 'email' => 'alice@example.com', 'role' => 'Student'],
+    ['id' => 2, 'name' => 'Bob', 'email' => 'bob@example.com', 'role' => 'Manager'],
+    ['id' => 3, 'name' => 'Charlie', 'email' => 'charlie@example.com', 'role' => 'Admin'],
+];
 ?>
 
 <!DOCTYPE html>
@@ -9,49 +15,70 @@ require 'db_connect.php';
 <head>
     <title>Manage Users</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="manage_user.css">
 </head>
 <body>
-<h2>👥 Manage Users</h2>
-<a href="admin_dashboard.php">← Back to Admin Page</a> | 
-<a href="add_user.php">➕ Add New User</a><br><br>
 
-
-
-<?php if (isset($_SESSION['user_message'])): ?>
-    <div style="padding: 10px; background-color: #e0f7fa; border: 1px solid #4caf50; color: #00796b; margin-bottom: 15px;">
-        <?= $_SESSION['user_message'] ?>
+<div class="dashboard-wrapper">
+    <nav class="navbar">
+    <div class="navbar-logo">
+        <h1>Student College Accommodation System</h1>
     </div>
-<?php unset($_SESSION['user_message']); endif; ?>
 
-<table border="1" cellpadding="8" cellspacing="0">
-    <tr>
-        <th>ID</th>
-        <th>Full Name</th>
-        <th>Username</th>
-        <th>Role</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Actions</th>
-    </tr>
+    <div class="hamburger" onclick="toggleMenu()">☰</div> 
 
-    <?php
-    $result = $conn->query("SELECT * FROM users ORDER BY user_level, full_name");
-    while ($row = $result->fetch_assoc()):
-        $roleMap = [1 => 'Admin', 2 => 'Manager', 3 => 'Student'];
-    ?>
-        <tr>
-            <td><?= $row['user_id'] ?></td>
-            <td><?= htmlspecialchars($row['full_name']) ?></td>
-            <td><?= htmlspecialchars($row['username']) ?></td>
-            <td><?= $roleMap[$row['user_level']] ?? 'Unknown' ?></td>
-            <td><?= htmlspecialchars($row['email']) ?></td>
-            <td><?= htmlspecialchars($row['phone_number']) ?></td>
-            <td>
-                <a href="edit_user.php?id=<?= $row['user_id'] ?>">✏️ Edit</a> | 
-                <a href="delete_user.php?id=<?= $row['user_id'] ?>" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
-            </td>
-        </tr>
-    <?php endwhile; ?>
-</table>
+    <ul class="navbar-links" id="navbar-links"> 
+        <li><a href="manager_dashboard.php">Dashboard</a></li>
+        <li><a href="manage_users.php">Manage Users</a></li>
+        <li><a href="view_logs.php">View System Logs</a></li>
+        <li><a href="logout.php">Logout</a></li>
+    </ul>
+</nav>
+
+
+    <div class="dashboard-content">
+        <h2 class="welcome-message">Manage Users</h2>
+
+        <div class="user-actions">
+            <a href="add_user.php" class="add-btn">+ Add New User</a>
+        </div>
+
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user): ?>
+                <tr>
+                    <td><?= htmlspecialchars($user['id']) ?></td>
+                    <td><?= htmlspecialchars($user['name']) ?></td>
+                    <td><?= htmlspecialchars($user['email']) ?></td>
+                    <td><?= htmlspecialchars($user['role']) ?></td>
+                    <td>
+                        <a href="edit_user.php?id=<?= $user['id'] ?>" class="edit-btn">Edit</a>
+                        <a href="delete_user.php?id=<?= $user['id'] ?>" class="delete-btn" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function toggleMenu() {
+        const links = document.getElementById("navbar-links");
+        links.classList.toggle("active");
+    }
+</script>
+
+
+
 </body>
 </html>
