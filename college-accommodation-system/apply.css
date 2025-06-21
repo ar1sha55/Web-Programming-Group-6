@@ -1,0 +1,201 @@
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #328E6E;
+    padding: 20px 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+    transition: background-color 0.3s ease;
+    
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-links li {
+    margin: 0 5px;
+}
+
+/* Navbar Links Styling */
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    position: relative; /* For the pseudo-element to work */
+    padding: 8px 12px; /* Adds some padding for better clickable area */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Hover Effect */
+.navbar-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px; /* Size of the underline effect */
+    background-color: #67AE6E; /* Color for the underline */
+    transition: width 0.3s ease; /* Smooth transition effect */
+}
+
+.navbar-links a:hover::before {
+    width: 100%; /* Makes the underline appear on hover */
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background when hovered */
+}
+
+.apply-section {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.apply-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.apply-title {
+    color: #328E6E;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.apply-form label {
+    font-weight: 600;
+    margin-top: 20px;
+    display: block;
+    color: #23523f;
+}
+
+.apply-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #67AE6E;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 1em;
+}
+
+.apply-button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background-color: #328E6E;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+    background-color: #67AE6E;
+}
+
+.apply-alert {
+    background-color: #e8f5e9;
+    color: #388e3c;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.apply-back {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.apply-back a {
+    color: #328E6E;
+    text-decoration: none;
+}
+
+.apply-back a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Optimization */
+
+@media screen and (max-width: 768px) {
+
+    .apply-section {
+        padding-top: 220px; /* Creates space for the navbar */
+    }
+
+     .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .navbar-logo h1 {
+        font-size: 1.3em;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .navbar-links li {
+        margin: 10px 0;
+    }
+
+    .apply-container {
+        padding: 25px;
+        width: 95%;
+    }
+
+    .apply-title {
+        font-size: 1.5em;
+    }
+
+    .apply-form label {
+        font-size: 1em;
+    }
+
+    .apply-form select {
+        font-size: 0.95em;
+        padding: 10px;
+    }
+
+    .apply-button {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .apply-back {
+        font-size: 0.95em;
+    }
+
+    .apply-alert {
+        font-size: 0.95em;
+    }
+}
