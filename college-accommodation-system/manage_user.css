@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* === Reset and Base === */
+
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +12,8 @@ body {
     background: linear-gradient(135deg, #E1EEBC, #328E6E);
     min-height: 100vh;
     padding-top: 80px;
+    overflow-y: auto;
+    margin-bottom: 70px;
 }
 
 /* === Navbar === */
