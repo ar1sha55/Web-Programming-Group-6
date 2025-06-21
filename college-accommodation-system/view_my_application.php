@@ -1,6 +1,6 @@
 <?php
 require 'auth.php';
-checkLevel(3); // student level
+checkLevel(3);
 require 'db_connect.php';
 
 $student_id = $_SESSION['user_id'];
@@ -16,8 +16,7 @@ $stmt = $conn->prepare("
 ");
 $stmt->bind_param("i", $student_id);
 $stmt->execute();
-$latest_result = $stmt->get_result();
-$latest_app = $latest_result->fetch_assoc();
+$latest_app = $stmt->get_result()->fetch_assoc();
 
 // Fetch all applications
 $all_stmt = $conn->prepare("
@@ -33,50 +32,76 @@ $all_result = $all_stmt->get_result();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Applications</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Applications</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="viewstudent.css">
 </head>
 <body>
-<h2>Latest Accommodation Application</h2>
 
-<?php if ($latest_app): ?>
-    <p><strong>College:</strong> <?= htmlspecialchars($latest_app['college_name']) ?></p>
-    <p><strong>Applied On:</strong> <?= htmlspecialchars($latest_app['apply_date']) ?></p>
-    <p><strong>Room Type:</strong> <?= htmlspecialchars($latest_app['room_type']) ?></p>
-    <p><strong>Status:</strong> <strong style="color:blue"><?= ucfirst(htmlspecialchars($latest_app['status'])) ?></strong></p>
-    <p><strong>Remarks:</strong> <?= nl2br(htmlspecialchars($latest_app['remarks'])) ?></p>
-<?php else: ?>
-    <p>⚠️ No application found.</p>
-<?php endif; ?>
+  <nav class="navbar">
+    <div class="navbar-logo"><h1>Student College Accommodation System</h1></div>
+    <ul class="navbar-links">
+      <li><a href="student_dashboard.php">Dashboard</a></li>
+      <li><a href="apply_accommodation.php">Apply</a></li>
+      <li><a href="view_my_application.php">My Applications</a></li>
+      <li><a href="edit_profile.php">Profile</a></li>
+      <li><a href="logout.php">Logout</a></li>
+    </ul>
+  </nav>
 
-<hr>
-<h2>All Application History</h2>
+<div class="app-container">
+    <h2 class="app-title">Latest Accommodation Application</h2>
 
-<?php if ($all_result->num_rows > 0): ?>
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>Applied On</th>
-            <th>College</th>
-            <th>Room Type</th>
-            <th>Status</th>
-            <th>Remarks</th>
-        </tr>
-        <?php while ($row = $all_result->fetch_assoc()): ?>
+    <?php if ($latest_app): ?>
+      <div class="app-card">
+        <p><strong>College:</strong> <?=htmlspecialchars($latest_app['college_name'])?></p>
+        <p><strong>Applied On:</strong> <?=htmlspecialchars($latest_app['apply_date'])?></p>
+        <p><strong>Room Type:</strong> <?=htmlspecialchars($latest_app['room_type'])?></p>
+        <p><strong>Status:</strong> <span class="status"><?=ucfirst(htmlspecialchars($latest_app['status']))?></span></p>
+        <p><strong>Remarks:</strong><br><?=nl2br(htmlspecialchars($latest_app['remarks']))?></p>
+      </div>
+    <?php else: ?>
+      <div class="app-alert">⚠️ No application found.</div>
+    <?php endif; ?>
+
+    <h2 class="app-title">Application History</h2>
+    <?php if ($all_result->num_rows > 0): ?>
+      <div class="table-wrap">
+        <table class="app-table">
+          <thead>
             <tr>
-                <td><?= htmlspecialchars($row['apply_date']) ?></td>
-                <td><?= htmlspecialchars($row['college_name']) ?></td>
-                <td><?= htmlspecialchars($row['room_type']) ?></td>
-                <td><strong><?= ucfirst($row['status']) ?></strong></td>
-                <td><?= nl2br(htmlspecialchars($row['remarks'])) ?></td>
+              <th>Applied On</th>
+              <th>College</th>
+              <th>Room Type</th>
+              <th>Status</th>
+              <th>Remarks</th>
             </tr>
-        <?php endwhile; ?>
-    </table>
-<?php else: ?>
-    <p>No previous application records found.</p>
-<?php endif; ?>
+          </thead>
+          <tbody>
+            <?php while ($row = $all_result->fetch_assoc()): ?>
+              <tr>
+                <td><?=htmlspecialchars($row['apply_date'])?></td>
+                <td><?=htmlspecialchars($row['college_name'])?></td>
+                <td><?=htmlspecialchars($row['room_type'])?></td>
+                <td><span class="status"><?=ucfirst(htmlspecialchars($row['status']))?></span></td>
+                <td><?=nl2br(htmlspecialchars($row['remarks']))?></td>
+              </tr>
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      </div>
+    <?php else: ?>
+      <div class="app-alert">No previous application records found.</div>
+    <?php endif; ?>
 
-<a href="student_dashboard.php">← Back to Dashboard</a>
+    <div class="app-back">
+        <a href="student_dashboard.php">← Back to Dashboard</a>
+    </div>
+</div>
+
 </body>
 </html>
