@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #E1EEBC, #328E6E);
+    min-height: 100vh;
+    padding-top: 80px;
+    overflow-y: auto;
+    margin-bottom: 70px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #328E6E;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    align-items: center; 
+    margin: 0;
+}
+
+.navbar-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 8px 12px; 
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+
+
+.navbar-links li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* === Hamburger === */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .navbar-logo{
+       padding-top: 14.5px;
+       padding-bottom: 12.5px; 
+    }
+
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 10px;
+        width: 100%;
+        background-color: #328E6E;
+        padding: 10px 0;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+
+    .navbar-links li {
+        text-align: center;
+        padding-top:25px;
+        padding-bottom:3px;
+    }
+}
+
+
+/* Page content */
+.container {
+    margin-top: 50px;
+    padding: 20px 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #328E6E;
+}
+
+.accountinfo
+{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+h4 {
+    color: #267A5A;
+    margin-top: 25px;
+}
+
+/* Form styling */
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    font-family: inherit;
+}
+
+form textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+form input[type="submit"] {
+    background-color: #328E6E;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #267A5A;
+}
+
+/* Back link */
+a {
+    text-decoration: none;
+    color: #328E6E;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Flash messages */
+.message {
+    padding: 12px;
+    background-color: #e0f7fa;
+    border: 1px solid #4caf50;
+    color: #00796b;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
