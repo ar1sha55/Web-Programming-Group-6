@@ -29,30 +29,25 @@ if ($result && $result->num_rows > 0) {
 <html>
 <head>
     <title>Manage Users</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="manage_user.css">
+    <link rel="stylesheet" href="manage.css">
 </head>
 <body>
 
-<div class="dashboard-wrapper">
-    <nav class="navbar">
+<nav class="navbar">
     <div class="navbar-logo">
         <h1>Student College Accommodation System</h1>
     </div>
-
-    <div class="hamburger" onclick="toggleMenu()">☰</div> 
-
-    <ul class="navbar-links" id="navbar-links"> 
-        <li><a href="manager_dashboard.php">Dashboard</a></li>
+    <ul class="navbar-links">
+        <li><a href="admin_dashboard.php">Dashboard</a></li>
         <li><a href="manage_users.php">Manage Users</a></li>
         <li><a href="view_logs.php">View System Logs</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
 </nav>
 
-
-    <div class="dashboard-content">
-        <h2 class="welcome-message">Manage Users</h2>
+<div class="manage-section">
+    <div class="manage-container">
+        <h2 class="manage-title">Manage Users</h2>
 
         <div class="user-actions">
             <a href="add_user.php" class="add-btn">+ Add New User</a>
@@ -85,15 +80,6 @@ if ($result && $result->num_rows > 0) {
         </table>
     </div>
 </div>
-
-<script>
-    function toggleMenu() {
-        const links = document.getElementById("navbar-links");
-        links.classList.toggle("active");
-    }
-</script>
-
-
 
 </body>
 </html>
