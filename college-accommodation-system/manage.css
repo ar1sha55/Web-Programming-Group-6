@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #E1EEBC, #328E6E);
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #328E6E;
+    padding: 20px 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-links li {
+    margin: 0 5px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    position: relative;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #67AE6E;
+    transition: width 0.3s ease;
+}
+
+.navbar-links a:hover::before {
+    width: 100%;
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Manage Section */
+.manage-section {
+    margin-top: 60px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.manage-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1100px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.manage-title {
+    color: #328E6E;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.user-actions {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.add-btn {
+    background-color: #328E6E;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+    background-color: #67AE6E;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #c8e6c9;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #328E6E;
+    color: white;
+    font-weight: 600;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f1f8e9;
+}
+
+.user-table tr:hover {
+    background-color: #e0f2f1;
+}
+
+.edit-btn,
+.delete-btn {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin-right: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #66bb6a;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #e57373;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .navbar-logo h1 {
+        font-size: 1.3em;
+        text-align: center;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .navbar-links li {
+        margin: 10px 0;
+    }
+
+    .manage-container {
+        padding: 25px;
+        width: 100%;
+    }
+
+    .manage-title {
+        font-size: 1.5em;
+    }
+
+
+    .manage-section {
+        padding-top: 170px; /* More space for taller stacked navbar on small screens */
+    }
+    .add-btn {
+        padding: 8px 16px;
+        font-size: 0.95em;
+    }
+
+    .user-table th,
+    .user-table td {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+}
