@@ -93,21 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Edit User</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="edit_users.css">
+    <link rel="stylesheet" href="edit.css">
 </head>
 <body>
-    
 
-<div class="dashboard-wrapper">
-    <nav class="navbar">
+<nav class="navbar">
     <div class="navbar-logo">
         <h1>Student College Accommodation System</h1>
     </div>
-
-    <div class="hamburger" onclick="toggleMenu()">☰</div> 
-
-    <ul class="navbar-links" id="navbar-links"> 
+    <ul class="navbar-links">
         <li><a href="manager_dashboard.php">Dashboard</a></li>
         <li><a href="manage_users.php">Manage Users</a></li>
         <li><a href="view_logs.php">View System Logs</a></li>
@@ -115,56 +109,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </ul>
 </nav>
 
-<div class="container">
-<h2>✏️ Edit User</h2>
-<a href="manage_users.php">← Back to User List</a><br><br>
+<div class="edit-section">
+    <div class="edit-container">
+        <h2 class="edit-title">✏️ Edit User</h2>
+        <div class="edit-back"><a href="manage_users.php">← Back to User List</a></div>
 
+        <?php if (isset($_SESSION['user_message'])): ?>
+        <div class="edit-alert">
+            <?= $_SESSION['user_message']; unset($_SESSION['user_message']); ?>
+        </div>
+        <?php endif; ?>
 
-<?php if (isset($_SESSION['user_message'])): ?>
-    <div class="message" style="padding: 10px; background-color: #e0f7fa; border: 1px solid #4caf50; color: #00796b; margin-bottom: 15px;">
-        <?= $_SESSION['user_message']; unset($_SESSION['user_message']); ?>
+        <form method="post" class="edit-form">
+            <label>Full Name:</label>
+            <input type="text" name="full_name" value="<?= htmlspecialchars($user['full_name']) ?>" required>
+
+            <label>Username:</label>
+            <input type="text" name="username" value="<?= htmlspecialchars($user['username']) ?>" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" value="<?= htmlspecialchars($user['password']) ?>">
+
+            <label>Email:</label>
+            <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>">
+
+            <label>Phone:</label>
+            <input type="text" name="phone_number" value="<?= htmlspecialchars($user['phone_number']) ?>">
+
+            <label>Address:</label>
+            <textarea name="address"><?= htmlspecialchars($user['address']) ?></textarea>
+
+            <h4>Role: 
+                <strong><?= $user['user_level'] == 1 ? 'Admin' : ($user['user_level'] == 2 ? 'Manager' : 'Student') ?></strong>
+            </h4>
+
+            <?php if ($user['user_level'] === 2): ?>
+                <label>Department:</label>
+                <input type="text" name="department" value="<?= htmlspecialchars($extra['department']) ?>">
+
+                <label>Office Phone:</label>
+                <input type="text" name="office_phone" value="<?= htmlspecialchars($extra['office_phone']) ?>">
+            <?php endif; ?>
+
+            <?php if ($user['user_level'] === 3): ?>
+                <label>Matric Number:</label>
+                <input type="text" name="matric_number" value="<?= htmlspecialchars($extra['matric_number']) ?>">
+
+                <label>Program:</label>
+                <input type="text" name="program" value="<?= htmlspecialchars($extra['program']) ?>">
+
+                <label>Year:</label>
+                <input type="number" name="year" value="<?= htmlspecialchars($extra['year']) ?>">
+            <?php endif; ?>
+
+            <input type="submit" value="Update User" class="edit-button">
+        </form>
     </div>
-<?php endif; ?>
-
-<form method="post">
-    <h4 class = "accountinfo">Account Info</h4>
-    Full Name: <input type="text" name="full_name" value="<?= htmlspecialchars($user['full_name']) ?>" required><br>
-    Username: <input type="text" name="username" value="<?= htmlspecialchars($user['username']) ?>" required><br>
-    Password: <input type="password" name="password" value="<?= htmlspecialchars($user['password']) ?>"><br>
-    Email: <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>"><br>
-    Phone: <input type="text" name="phone_number" value="<?= htmlspecialchars($user['phone_number']) ?>"><br>
-    Address: <textarea name="address"><?= htmlspecialchars($user['address']) ?></textarea><br><br>
-
-    <h4>Role: 
-        <strong><?= $user['user_level'] == 1 ? 'Admin' : ($user['user_level'] == 2 ? 'Manager' : 'Student') ?></strong>
-    </h4>
-
-    <!-- Manager Info (Visible only if the role is Manager) -->
-    <?php if ($user['user_level'] === 2): ?>
-    <h4>🏢 Manager Info</h4>
-    Department: <input type="text" name="department" value="<?= htmlspecialchars($extra['department']) ?>"><br>
-    Office Phone: <input type="text" name="office_phone" value="<?= htmlspecialchars($extra['office_phone']) ?>"><br>
-    <?php endif; ?>
-
-    <!-- Student Info (Visible only if the role is Student) -->
-    <?php if ($user['user_level'] === 3): ?>
-    <h4>🎓 Student Info</h4>
-    Matric Number: <input type="text" name="matric_number" value="<?= htmlspecialchars($extra['matric_number']) ?>"><br>
-    Program: <input type="text" name="program" value="<?= htmlspecialchars($extra['program']) ?>"><br>
-    Year: <input type="number" name="year" value="<?= htmlspecialchars($extra['year']) ?>"><br>
-    <?php endif; ?>
-
-    <br><input type="submit" value="Update User">
-</form>
-    </div>
-    </div>
-
-<script>
-function toggleMenu() {
-    document.getElementById("navbar-links").classList.toggle("active");
-}
-</script>
-
+</div>
+<script src="form_validation.js"></script>
 
 </body>
 </html>
