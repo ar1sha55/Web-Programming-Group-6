@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #E1EEBC, #328E6E);
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #328E6E;
+    padding: 20px 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-links li {
+    margin: 0 5px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    position: relative;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #67AE6E;
+    transition: width 0.3s ease;
+}
+
+.navbar-links a:hover::before {
+    width: 100%;
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Edit Page Styling */
+.edit-section {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    width: 100%;
+}
+
+.edit-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.edit-title {
+    color: #328E6E;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.edit-form label {
+    font-weight: 600;
+    margin-top: 20px;
+    display: block;
+    color: #23523f;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="number"],
+.edit-form input[type="password"],
+.edit-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #67AE6E;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 1em;
+}
+
+.edit-form textarea {
+    resize: vertical;
+}
+
+.edit-button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background-color: #328E6E;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #67AE6E;
+}
+
+.edit-alert {
+    background-color: #e8f5e9;
+    color: #388e3c;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.edit-back {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-back a {
+    color: #328E6E;
+    text-decoration: none;
+}
+
+.edit-back a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .navbar-logo h1 {
+        font-size: 1.3em;
+        text-align: center;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .navbar-links li {
+        margin: 10px 0;
+    }
+
+    .edit-section{
+        padding-top: 140px;
+    }
+
+    .edit-container {
+        padding: 25px;
+        width: 95%;
+    }
+
+    .edit-title {
+        font-size: 1.5em;
+    }
+
+    .edit-button {
+        padding: 12px;
+        font-size: 1em;
+    }
+}
